@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1#title Dashboard
+  h3 Latest Test runs
+  .table-responsive
+    table.table.table-striped.table-sm
+      thead
+        tr
+          th  TestCase
+          th  Url
+          th  Result
+          th  Message
+          th  Status
+          th  Runtime
+          th  TC URL
+      tbody
+        each run, index in latestRuns
+          tr
+            td=run.testCase.name
+            td=run.testCase.url
+            if(run.result == 'PASS')
+              td
+                i.fa.fa-check-circle
+            else
+              td
+                i.fa.fa-times-circle
+            td=run.message || 'No message'
+            td=run.status
+            td=run.runtime
+            td
+              a(href='#')
+                Link

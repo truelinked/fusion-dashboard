@@ -1,0 +1,11 @@
+extends ../layout
+
+block content
+    h3#title Upload Testcases
+    .row#filter
+        form.row.row-cols-md-auto.g-3.align-items-center(method='POST' action='/upload/upload-multiple-json' enctype='multipart/form-data')
+            .col-md-6
+                label Select multiple json:
+                input(type='file' name='multiple_json' multiple='')
+            .col-md-6
+                input(type='submit' name='btn_upload_multiple_json' value='Upload')

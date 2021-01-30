@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+    h3#title Test Suite Search
+    .row#filter
+        form.row.row-cols-md-auto.g-3.align-items-center(action='/suites' method='post')
+            .col-md-6
+                label.form-label(for='suiteName') Choose a http type:
+                select.form-select.form-select-md.mb-3(aria-label='.form-select-lg example', id='suiteName', name='suiteName')
+                    option(selected='') Select a test suite
+                    each suite, index in suites
+                        option(value=suite.name)=suite.name
+            .col-md-6
+                button.btn.btn-primary(type='submit') Submit
+
+    if(testSuite)
+        h3#title=testSuite.name
+        a(href='/run/suite/' + testSuite.id)    RunSuite
+            i.fa.fa-play
+        .table-responsive
+            table.table.table-striped.table-sm
+                thead
+                    tr
+                        th  Name
+                        th  Type
+                        th  Target
+                tbody
+                    each testcase, index in testSuite.testcases
+                        tr
+                            th=testcase.name
+                            th=testcase.type
+                            th=testcase.target
+
+    else
+        h3 No testcases

@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+    h3#title Search Test cases
+    .row#filter
+        form.row.row-cols-md-auto.g-3.align-items-center(action='/search' method='post')
+            .col-md-6
+                label.form-label(for='type') Choose a http type:
+                select.form-select.form-select-md.mb-3(aria-label='.form-select-lg example', id='type', name='type')
+                    option(selected='') Select a HTTP type
+                    option(value='get') GET
+                    option(value='post') POST
+                    option(value='put') PUT
+                    option(value='delete') DELETE
+            .col-md-6
+                button.btn.btn-primary(type='submit') Submit
+
+    if(documents)
+        .table-responsive
+            table.table.table-striped.table-sm
+                thead
+                    tr
+                        th  Name
+                        th  Type
+                        th  Target
+                        th  Action
+                tbody
+                    each document, index in documents
+                        tr
+                            th=document.name
+                            th=document.type
+                            th=document.target
+                            th
+                                a(href='/run/tc/' + document._id)
+                                    i.fa.fa-play

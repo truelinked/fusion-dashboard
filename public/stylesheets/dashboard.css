@@ -1,0 +1,31 @@
+main > .container {
+    padding: 60px 15px 0;
+}
+
+i.fa.fa-times-circle {
+    color: orangered;
+}
+i.fa.fa-check-cirlce {
+    color: limegreen;
+}
+
+#title {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#filter {
+    text-align: center;
+    background-color: grey;
+    border-radius: 10px;
+}
+.sub-header {
+    text-align: center;
+}
+#data {
+    font-size: small;
+}
+#queryres {
+    font-size: medium;
+    text-align: center;
+}

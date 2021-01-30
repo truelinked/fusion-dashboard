@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    h3#title Testcase Result 
+    .row
+        .col-md-6
+            h2=testCase.name
+        .col-md-6
+            h2=testCase.target
+        .col-md-6
+            h2=result
+        .col-md-6
+            if(message)
+                h2=message
+

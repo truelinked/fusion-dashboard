@@ -1,0 +1,183 @@
+extends ../layout
+
+block content
+    h3#title Compare productions
+    .container
+        .row#filter
+            form.row.row-cols-md-auto.g-3.align-items-center(action='/productions' method='post')
+                .col-md-2
+                    label.form-label(for='year') Choose a year:
+                    select.form-select.form-select-md.mb-3(aria-label='.form-select-lg example', id='year', name='year')
+                        option(selected='') Select a Year
+                        option(value='2020') 2016
+                        option(value='2021') 2017
+                        option(value='2022') 2018
+                        option(value='2023') 2019
+                        option(value='2020') 2020
+                        option(value='2021') 2021
+                        option(value='2022') 2022
+                        option(value='2023') 2023
+                .col-md-4
+                    label.form-label(for='year') Choose a month:
+                    select.form-select.form-select-md.mb-3(aria-label='.form-select-lg example', id='month', name='month')
+                        option(selected='') Select a Month
+                        option(value='1') January
+                        option(value='2') February
+                        option(value='3') March
+                        option(value='4') April
+                        option(value='5') May
+                        option(value='6') June
+                        option(value='7') July
+                        option(value='8') August
+                        option(value='9') September
+                        option(value='10') October
+                        option(value='11') November
+                        option(value='12') December
+                .col-md-4
+                    label.form-label(for='country') Choose a country:
+                    select.form-select.form-select-md.mb-3(aria-label='.form-select-lg example', id='country', name='country')
+                        option(selected='') Select a country
+                        each country, index in countries
+                            option(value=country.id)=country.name
+                .col-md-2
+                    button.btn.btn-primary(type='submit') Submit
+
+    if(fusProductions)
+        .row#queryres
+            h3 Query Done for #{year} month #{month} country #{country}
+        .row
+            .col-md-6
+                h2.sub-header  Fusion(#{fusCount})
+                #accordionFusion.accordion
+                    each fusProduction, index in fusProductions
+                        .accordion-item
+                            h2.accordion-header(id='fheader'+index)
+                            button.accordion-button(type='button' data-bs-toggle='collapse' data-bs-target='#fcollapse'+index aria-expanded='true' aria-controls='fcollapse'+index )
+                                .row
+                                    .col-md-6
+                                        span=fusProduction.WorkName
+                                    .col-md-6
+                                        span=fusProduction.CompanyName
+
+                            if(index==0)
+                                .accordion-collapse.collapse.show(id='fcollapse'+index aria-labelledby='fheader'+index data-bs-parent='#accordionFusion')
+                                    .accordion-body
+                                        .row
+                                            .col-md-4
+                                                strong Cast
+                                                br
+                                                each cast in fusProduction.AllCasts
+                                                    i
+                                                        span#data=cast
+                                                    br
+                                            .col-md-4
+                                                strong Crew
+                                                br
+                                                each crew in fusProduction.AllCrew
+                                                    i
+                                                        span#data=crew
+                                                    br
+                                            .col-md-4
+                                                strong Dates
+                                                br
+                                                each date in fusProduction.AllDates
+                                                    i
+                                                        span#data=date
+                                                    br
+                                        .row
+                                            a(href='https://frontbase.operabase.net/productions/'+fusProduction.ProductionId+'/en') Go
+                            else
+                                .accordion-collapse.collapse(id='fcollapse'+index aria-labelledby='fheader'+index data-bs-parent='#accordionFusion')
+                                    .accordion-body
+                                        .row
+                                            .col-md-4
+                                                strong Cast
+                                                br
+                                                each cast in fusProduction.AllCasts
+                                                    i
+                                                        span#data=cast
+                                                    br
+                                            .col-md-4
+                                                strong Crew
+                                                br
+                                                each crew in fusProduction.AllCrew
+                                                    i
+                                                        span#data=crew
+                                                    br
+                                            .col-md-4
+                                                strong Dates
+                                                br
+                                                each date in fusProduction.AllDates
+                                                    i
+                                                        span#data=date
+                                                    br
+                                        .row
+                                            a(href='https://frontbase.operabase.net/productions/'+fusProduction.ProductionId+'/en') Go
+
+            .col-md-6
+                h2.sub-header Operabase(#{opCount})
+                #accordionOperabase.accordion
+                    each fusProduction, index in obProductions
+                        .accordion-item
+                            h2.accordion-header(id='oheader'+index)
+                            button.accordion-button(type='button' data-bs-toggle='collapse' data-bs-target='#ocollapse'+index aria-expanded='true' aria-controls='ocollapse'+index )
+                                .row
+                                    .col-md-6
+                                        span=fusProduction.WorkName
+                                    .col-md-6
+                                        span=fusProduction.CompanyName
+
+                            if(index==0)
+                                .accordion-collapse.collapse.show(id='ocollapse'+index aria-labelledby='oheader'+index data-bs-parent='#accordionOperabase')
+                                    .accordion-body
+                                        .row
+                                            .col-md-4
+                                                strong Cast
+                                                br
+                                                each cast in fusProduction.AllCasts
+                                                    i
+                                                        span#data=cast
+                                                    br
+                                            .col-md-4
+                                                strong Crew
+                                                br
+                                                each crew in fusProduction.AllCrew
+                                                    i
+                                                        span#data=crew
+                                                    br
+                                            .col-md-4
+                                                strong Dates
+                                                br
+                                                each date in fusProduction.AllDates
+                                                    i
+                                                        span#data=date
+                                                    br
+                                        .row
+                                            a(href='https://v2.operabase.org/ref/1/'+fusProduction.ProductionId) Go
+                            else
+                                .accordion-collapse.collapse(id='ocollapse'+index aria-labelledby='oheader'+index data-bs-parent='#accordionOperabase')
+                                    .accordion-body
+                                        .row
+                                            .col-md-4
+                                                strong Cast
+                                                br
+                                                each cast in fusProduction.AllCasts
+                                                    i
+                                                        span#data=cast
+                                                    br
+                                            .col-md-4
+                                                strong Crew
+                                                br
+                                                each crew in fusProduction.AllCrew
+                                                    i
+                                                        span#data=crew
+                                                    br
+                                            .col-md-4
+                                                strong Dates
+                                                br
+                                                each date in fusProduction.AllDates
+                                                    i
+                                                        span#data=date
+                                                    br
+                                        .row
+                                            a(href='https://v2.operabase.org/ref/1/'+fusProduction.ProductionId) Go
